@@ -28,6 +28,30 @@
   color: #61dafb;
 }
 
+.header {
+  background-color: lightslategray;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  padding: 5px;
+  color: black;
+}
+
+.game-page {
+  background-color: lightgray;
+  position: relative;
+  padding: 5px;
+}
+
+.actor-img {
+  display: block;
+  margin: 0 auto;
+  max-width: 50vw;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
