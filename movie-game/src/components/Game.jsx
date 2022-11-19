@@ -1,20 +1,22 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getActorFilmography } from "../game-logic/api-initial-test";
+import { getActorFilmography, getBio, getMostPopular } from "../utils/api";
 
 export const Game = () => {
-  const [firstTest, setFirstTest] = useState("");
+  const [firstTest, setFirstTest] = useState(false);
+  const [startActor, setStartActor] = useState({});
 
   useEffect(() => {
-    const test = getActorFilmography();
-    setFirstTest(test);
+    setFirstTest(false);
+    // const test = getBio("nm6073955");
+    setFirstTest(true);
   }, []);
 
   return (
     <section>
       <section>game page</section>
-      {/* <section>{firstTest}</section> */}
+      <section>{firstTest ? "true" : "false"}</section>
     </section>
   );
 };
