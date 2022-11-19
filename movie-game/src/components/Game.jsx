@@ -14,7 +14,7 @@ export const Game = () => {
   }, []);
 
   return (
-    <section>
+    <section className="game-page">
       <section>game page</section>
       <section>{firstTest ? "true" : "false"}</section>
     </section>
