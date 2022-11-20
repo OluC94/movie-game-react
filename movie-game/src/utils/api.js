@@ -29,8 +29,21 @@ export const getBio = (actorID) => {
         name: data.name,
         realName: data.realName,
         img: data.image.url,
+        actor_id: data.id.substring(6, data.id.length - 1),
       };
       return actorData;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getActorFilmography = (actorID) => {
+  const params = { nconst: actorID };
+  return movieAPI
+    .get("/actors/get-all-filmography", { params })
+    .then(({ data }) => {
+      return data.filmography;
     })
     .catch((err) => {
       console.log(err);

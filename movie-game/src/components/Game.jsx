@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
 import { ActorContext } from "../context";
-import { getBio } from "../utils";
+import { getActorFilmography, getBio } from "../utils/api";
 import { Actor } from "./Actor";
 import { Loading } from "./Loading";
 
