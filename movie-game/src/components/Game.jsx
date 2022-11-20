@@ -1,17 +1,17 @@
 import React from "react";
 import { useEffect } from "react";
+import { useContext } from "react";
 import { useState } from "react";
-import { getActorFilmography, getBio, getMostPopular } from "../utils/api";
+import { ActorContext } from "../context";
+import { getBio } from "../utils";
 import { Loading } from "./Loading";
 
 export const Game = () => {
-  const [firstTest, setFirstTest] = useState(false);
-  const [startActor, setStartActor] = useState({});
-  const [endActor, setEndActor] = useState({});
+  const { startActor, setStartActor } = useContext(ActorContext);
+  const { endActor, setEndActor } = useContext(ActorContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setFirstTest(false);
     setIsLoading(true);
     const start = getBio("nm6073955");
     const target = getBio("nm5939164");
@@ -20,7 +20,6 @@ export const Game = () => {
       setStartActor(actors[0]);
       setEndActor(actors[1]);
       setIsLoading(false);
-      setFirstTest(true);
     });
   }, []);
   if (isLoading) return <Loading />;
@@ -35,7 +34,6 @@ export const Game = () => {
         {endActor.name}
         <img className="actor-img" src={endActor.img} />
       </section>
-      <section>{firstTest ? "useEffect running" : "false"}</section>
     </section>
   );
 };
