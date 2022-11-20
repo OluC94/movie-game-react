@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import { ActorContext } from "../context";
 import { getBio } from "../utils";
+import { Actor } from "./Actor";
 import { Loading } from "./Loading";
 
 export const Game = () => {
@@ -26,14 +27,8 @@ export const Game = () => {
   return (
     <section className="game-page">
       <h2>game page</h2>
-      <section>
-        {startActor.name}
-        <img className="actor-img" src={startActor.img} />
-      </section>
-      <section>
-        {endActor.name}
-        <img className="actor-img" src={endActor.img} />
-      </section>
+      <Actor startActor={startActor} />
+      <Actor endActor={endActor} />
     </section>
   );
 };
