@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ActorContext } from "../context";
 import { getActorFilmography, getBio } from "../utils/api";
 import { Actor } from "./Actor";
+import { InputArea } from "./InputArea";
 import { Loading } from "./Loading";
 
 export const Game = () => {
@@ -25,9 +26,10 @@ export const Game = () => {
   }, []);
   if (isLoading) return <Loading />;
   return (
-    <section className="game-page">
+    <section className="game-area">
       <h2>game page</h2>
       <Actor startActor={startActor} />
+      <InputArea />
       <Actor endActor={endActor} />
     </section>
   );

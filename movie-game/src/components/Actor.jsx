@@ -20,7 +20,7 @@ export const Actor = (props) => {
 
   if (isLoading) return <Loading />;
   return (
-    <section>
+    <section className="actor">
       <h3>{actorInfo.name}</h3>
       <section>
         <img className="actor-img" src={actorInfo.img} />
