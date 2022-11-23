@@ -515,4 +515,25 @@ export const fpAppearances = [
     titleType: "movie",
     year: 2019,
   },
+  {
+    billing: 3,
+    category: "not_a_category",
+    characters: ["Fake Character Name"],
+    roles: [
+      {
+        character: "Fake Character Name",
+      },
+    ],
+    id: "/title/not_an_id/",
+    image: {
+      height: 9000,
+      id: "/title/not_an_id/images/also_no_an_id",
+      url: "invalid_url",
+      width: 6072,
+    },
+    status: "released",
+    title: "Fake movie Title",
+    titleType: "movie",
+    year: 2019,
+  },
 ];

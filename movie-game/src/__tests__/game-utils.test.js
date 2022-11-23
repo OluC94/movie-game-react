@@ -9,5 +9,11 @@ describe("checkAppearance", () => {
     expect(checkAppearance("Little Women", fpAppearances)).toBe(true);
     expect(checkAppearance("Not Little Women", fpAppearances)).toBe(false);
   });
-  it.todo("checks for 'actor' or 'self'");
+  it("returns the correct result based on the category ('actor', 'actress' or 'self')", () => {
+    expect(checkAppearance("Hawkeye", fpAppearances)).toBe(true);
+    expect(checkAppearance("Fake movie Title", fpAppearances)).toBe(false);
+  });
+  it("return the correct result regardless of case", () => {
+    expect(checkAppearance("little women", fpAppearances)).toBe(true);
+  });
 });
