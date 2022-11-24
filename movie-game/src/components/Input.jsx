@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { ActorContext } from "../context";
 import { getActorFilmography } from "../utils/api";
@@ -6,6 +7,8 @@ import { checkAppearance } from "../utils/game-utils";
 
 export const Input = ({ answerData }) => {
   const [inputAnswer, setInputAnswer] = useState("");
+  const [isChecking, setIsChecking] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
   const { answerList, setAnswerList, setIsValidAnswer } = answerData;
   const { startActor, setStartActor } = useContext(ActorContext);
   const handleAnswerInput = (e) => {
@@ -15,24 +18,24 @@ export const Input = ({ answerData }) => {
   const checkActorApp = (actorID) => {
     const apps = getActorFilmography(actorID);
     return Promise.all([apps]).then(([appsArr]) => {
-      if (checkAppearance(inputAnswer, appsArr)) {
-        // return something
-      } else {
-        //return something else
-      }
-      // maybe just return the result of the function call?
+      return checkAppearance(inputAnswer, appsArr);
     });
   };
 
   const handleAnswerSubmit = (e) => {
     e.preventDefault();
+    setIsChecking(true);
     let queryID;
     if (answerList.length === 0) {
       queryID = startActor.actor_id;
+    } else {
+      // this is where the new queryID will be set
     }
-    checkActorApp(queryID);
-    // if the answer passes the validation check, push it into the answer list, setValidAnswer true
-    // if incorrect, valid Answer False
+
+    checkActorApp(queryID).then((result) => {
+      setIsChecking(false);
+      setAnswerList([...answerList, { text: inputAnswer, isValid: result }]);
+    });
 
     console.log(inputAnswer);
   };
@@ -51,6 +54,7 @@ export const Input = ({ answerData }) => {
         <br />
         <button onClick={handleAnswerSubmit}>Submit</button>
       </form>
+      <section>{isChecking ? "..." : null}</section>
     </section>
   );
 };

@@ -61,6 +61,25 @@
   margin: 5px;
 }
 
+.answer-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  gap: 12px;
+  margin: 0 auto;
+  padding-inline-start: 0px;
+  width: calc(95% + 12px);
+}
+
+.correct-answer {
+  color: green;
+}
+.incorrect-answer {
+  color: red;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

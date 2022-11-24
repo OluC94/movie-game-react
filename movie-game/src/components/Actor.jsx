@@ -12,7 +12,7 @@ export const Actor = (props) => {
     setIsLoading(true);
     Promise.all([getActorFilmography(actorInfo.actor_id)]).then(
       (filmography) => {
-        console.log(filmography);
+        // console.log(filmography[0]);
         setIsLoading(false);
       }
     );
