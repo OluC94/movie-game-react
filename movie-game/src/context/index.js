@@ -1,3 +1,4 @@
-import { ActorContext } from "./actor.context";
+import { createContext } from "react";
 
-export { ActorContext };
+export const ActorContext = createContext();
+export const GameContext = createContext();
