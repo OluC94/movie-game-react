@@ -23,7 +23,7 @@ export const InputArea = () => {
             {answerList.map((answer) => {
               return (
                 <li
-                  key={answerList.length}
+                  key={answer.text}
                   className={
                     answer.isValid ? "correct-answer" : "incorrect-answer"
                   }

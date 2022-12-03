@@ -2,21 +2,23 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { ActorContext, GameContext } from "../context";
-import { getActorFilmography } from "../utils/api";
+import { getActorFilmography, getCastList } from "../utils/api";
 import { checkAppearance } from "../utils/game-utils";
 
 export const Input = ({ answerData }) => {
   // state
   const [inputAnswer, setInputAnswer] = useState("");
   const [isChecking, setIsChecking] = useState(false);
-  const [appearanceTitleID, setAppearanceTitleID] = useState("");
+  const [appearanceTitleData, setAppearanceTitleData] = useState({});
   const [actorQueryID, setActorQueryID] = useState("");
+
   // context
   const { startActor, endActor } = useContext(ActorContext);
   const { isAppearanceRound, setIsAppearanceRound, score, setScore } =
     useContext(GameContext);
   // props
   const { answerList, setAnswerList, setIsValidAnswer } = answerData;
+
   // everything else
   const handleAnswerInput = (e) => {
     setInputAnswer(e.target.value);
@@ -37,13 +39,10 @@ export const Input = ({ answerData }) => {
       queryID = actorQueryID;
     }
 
-    // get rid of query id, replace with actorQueryID (state)
-    // on game init, set start actor id
-
     checkActorApp(queryID)
       .then((result) => {
         setIsChecking(false);
-        setInputAnswer("");
+        setInputAnswer(""); // empty the input box
         setAnswerList([
           ...answerList,
           { text: inputAnswer, isValid: result.isValid },
@@ -51,39 +50,51 @@ export const Input = ({ answerData }) => {
         return result;
       })
       .then((result) => {
-        console.log(result);
         if (result.isValid) {
           setIsAppearanceRound(false);
-          setAppearanceTitleID(result.title_id);
-          // get the cast of the title
+          setAppearanceTitleData({
+            title: result.title,
+            title_id: result.title_id,
+          });
+          getCastList(appearanceTitleData.title_id).then((result) => {
+            console.log(result);
+          });
         } else {
-          // make sure the actor id stays the same
-          setActorQueryID(queryID);
+          setActorQueryID(queryID); // make sure the actor id stays the same
         }
-        console.log(queryID);
+        setScore((currScore) => {
+          return currScore + 1;
+        });
       })
       .catch((err) => {
         // error handling
-        setScore((currScore) => {
-          return currScore - 1;
-        });
       });
   };
 
   const handleActorInput = () => {
-    console.log("pick an actor in the title");
+    console.log(appearanceTitleData);
   };
+
+  /* 
+  1 - get cast for correct answer (get when the correct answer has been found can be done before)
+  2 - check cast list function - does input name match any of the cast list
+  3 - 
+  
+  
+  
+  */
 
   const handleAnswerSubmit = (e) => {
     e.preventDefault();
-    setScore((currScore) => {
-      return currScore + 1;
-    });
-    setIsChecking(true);
-    if (isAppearanceRound) {
-      handleAppearanceInput();
+    if (inputAnswer.length === 0) {
+      // set velidation method
     } else {
-      handleActorInput();
+      setIsChecking(true);
+      if (isAppearanceRound) {
+        handleAppearanceInput();
+      } else {
+        handleActorInput();
+      }
     }
   };
 

@@ -53,3 +53,18 @@ export const getActorFilmography = (actorID) => {
       console.log(err);
     });
 };
+
+export const getCastList = (title_id) => {
+  const params = { tconst: title_id };
+  return movieAPI
+    .get("/title/get-full-credits", { params })
+    .then(({ data }) => {
+      console.log(data.base);
+      const titleData = { titleType: data.base.titleType, cast: data.cast };
+      return titleData;
+    });
+};
+
+// getCastList("tt3281548");
+
+// https://rapidapi.com/apidojo/api/online-movie-database
