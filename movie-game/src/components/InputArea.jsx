@@ -17,13 +17,13 @@ export const InputArea = () => {
     <section>
       <section className="answers">
         {answerList.length === 0 ? (
-          `Input one of ${startActor.name}'s appearances`
+          `Name one of ${startActor.name}'s appearances`
         ) : (
           <ul className="answer-list">
             {answerList.map((answer) => {
               return (
                 <li
-                  key={answerList.length}
+                  key={answer.text}
                   className={
                     answer.isValid ? "correct-answer" : "incorrect-answer"
                   }

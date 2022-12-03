@@ -10,7 +10,7 @@ function App() {
   const [startActor, setStartActor] = useState({});
   const [endActor, setEndActor] = useState({});
   const [gameOver, setGameOver] = useState(null); // implement start button, init this as true until start is pressed
-  const [round, setRound] = useState(true); // true/false for check filmog/cast
+  const [isAppearanceRound, setIsAppearanceRound] = useState(true); // true/false for check filmog/cast
   const [score, setScore] = useState(0);
 
   return (
@@ -18,7 +18,14 @@ function App() {
       value={{ startActor, setStartActor, endActor, setEndActor }}
     >
       <GameContext.Provider
-        value={{ gameOver, setGameOver, round, setRound, score, setScore }}
+        value={{
+          gameOver,
+          setGameOver,
+          isAppearanceRound,
+          setIsAppearanceRound,
+          score,
+          setScore,
+        }}
       >
         <section className="App">
           <Header />
