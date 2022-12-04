@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import { Input } from "./Input";
 import { ActorContext } from "../context";
+import { DisplayInputs } from "./DisplayInputs";
 
 export const InputArea = () => {
   const [answerList, setAnswerList] = useState([]);
@@ -15,6 +16,7 @@ export const InputArea = () => {
 
   return (
     <section>
+      <DisplayInputs />
       <section className="answers">
         {answerList.length === 0 ? (
           `Name one of ${startActor.name}'s appearances`
@@ -23,12 +25,13 @@ export const InputArea = () => {
             {answerList.map((answer) => {
               return (
                 <li
-                  key={answer.text}
-                  className={
-                    answer.isValid ? "correct-answer" : "incorrect-answer"
-                  }
+                  key={Date.now()}
+                  // className={
+                  //   answer.isValid ? "correct-answer" : "incorrect-answer"
+                  // }
                 >
-                  {answer.text}
+                  {answer}
+                  List element within map
                 </li>
               );
             })}

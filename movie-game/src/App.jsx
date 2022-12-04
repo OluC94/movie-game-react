@@ -8,6 +8,7 @@ import { useState } from "react";
 
 function App() {
   const [startActor, setStartActor] = useState({});
+  const [filmography, setFilmography] = useState([]);
   const [endActor, setEndActor] = useState({});
   const [gameOver, setGameOver] = useState(null); // implement start button, init this as true until start is pressed
   const [isAppearanceRound, setIsAppearanceRound] = useState(true); // true/false for check filmog/cast
@@ -15,7 +16,14 @@ function App() {
 
   return (
     <ActorContext.Provider
-      value={{ startActor, setStartActor, endActor, setEndActor }}
+      value={{
+        startActor,
+        setStartActor,
+        endActor,
+        setEndActor,
+        filmography,
+        setFilmography,
+      }}
     >
       <GameContext.Provider
         value={{

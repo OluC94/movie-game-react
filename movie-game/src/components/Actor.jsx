@@ -7,12 +7,15 @@ import { Loading } from "./Loading";
 export const Actor = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const actorInfo = props.startActor || props.endActor;
+  const { setFilmography } = props;
 
   useEffect(() => {
     setIsLoading(true);
     Promise.all([getActorFilmography(actorInfo.actor_id)]).then(
-      (filmography) => {
-        // console.log(filmography[0]);
+      (filmographyData) => {
+        if (props.startActor) {
+          setFilmography(filmographyData[0]);
+        }
         setIsLoading(false);
       }
     );

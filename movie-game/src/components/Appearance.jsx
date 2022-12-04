@@ -1,5 +1,5 @@
 import React from "react";
 
-export const Appearance = () => {
-  return <section>Appearance Component</section>;
+export const Appearance = (props) => {
+  return <section>Appearance Component {props.number}</section>;
 };
