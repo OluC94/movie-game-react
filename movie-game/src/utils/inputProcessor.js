@@ -1,14 +1,14 @@
-export const matchCheck = ({ appearanceRound, idToCheck, list }) => {
+// don't think I need match check
+export const matchCheck = (appearanceRound, checkingFunction) => {
   if (appearanceRound) {
-    // need to check that the appearance input by the user matches the actor flimography
-    return "boolean, write another function that deals with correct/incorrect";
+    return "";
   } else {
     // check that the actor appears in the cast
     return "boolean, write another function that deals with correct/incorrect";
   }
 };
 
-export const inputProcessor = ({ appearanceRound, playerInput }) => {
+export const processInput = ({ appearanceRound, playerInput }) => {
   if (appearanceRound) {
     // call the function that deals with the appearance input using playerInput as the argument
     //
@@ -28,11 +28,11 @@ Information on what to push into the DisplayInputs component
 
 */
 
-("*********** start here next time ************");
 /* 
+"*********** start here next time ************"
 - Actor component currently auto fetches the filmography
 - filmography context added
-- need to utilise in validation as function
+- need to utilise in validation function
 
 
 

@@ -10,9 +10,8 @@ import { InputArea } from "./InputArea";
 import { Loading } from "./Loading";
 
 export const Game = () => {
-  const { startActor, setStartActor } = useContext(ActorContext);
-  const { endActor, setEndActor } = useContext(ActorContext);
-  const { filmography, setFilmography } = useContext(ActorContext);
+  const { startActor, setStartActor, endActor, setEndActor, setFilmography } =
+    useContext(ActorContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

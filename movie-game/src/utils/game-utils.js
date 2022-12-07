@@ -1,3 +1,4 @@
+// title = name of movie or show
 export const checkAppearance = (title, actorApps) => {
   const validCategory = ["actor", "actress", "self"];
   const result = { title: null, title_id: null, isValid: false };

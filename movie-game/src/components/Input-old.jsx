@@ -6,7 +6,7 @@ import { getActorFilmography, getCastList } from "../utils/api";
 import { checkAppearance } from "../utils/game-utils";
 import { Appearance } from "./Appearance";
 
-export const InputCopy = ({ answerData }) => {
+export const InputOld = ({ answerData }) => {
   // state
   const [inputAnswer, setInputAnswer] = useState("");
   const [isChecking, setIsChecking] = useState(false);
@@ -33,19 +33,65 @@ export const InputCopy = ({ answerData }) => {
   };
 
   const handleAppearanceInput = () => {
-    // on starting round -> get the actor ID from the state then call inputProcessor with appearanceRound and actorID
-    // on following rounds: a name will be input -> that name will be checked against the filmography and the ID can be rerieved from there
-    // run the processor input
+    let queryID;
+    if (answerList.length === 0) {
+      queryID = startActor.actor_id;
+    } else {
+      queryID = actorQueryID;
+    }
+
+    checkActorApp(queryID)
+      .then((result) => {
+        setIsChecking(false);
+        setInputAnswer(""); // empty the input box
+        // setAnswerList([
+        //   ...answerList,
+        //   { text: inputAnswer, isValid: result.isValid },
+        // ]);
+        setAnswerList([...answerList, <Appearance />]);
+        // change this to <Appearance /> with props containing appearance title, appearance iD and isValid
+
+        return result;
+      })
+      .then((result) => {
+        if (result.isValid) {
+          setIsAppearanceRound(false);
+          setAppearanceTitleData({
+            title: result.title,
+            title_id: result.title_id,
+          });
+          getCastList(appearanceTitleData.title_id).then((result) => {
+            console.log(result);
+          });
+        } else {
+          setActorQueryID(queryID); // make sure the actor id stays the same
+        }
+        setScore((currScore) => {
+          return currScore + 1;
+        });
+      })
+      .catch((err) => {
+        // error handling
+      });
   };
 
   const handleActorInput = () => {
     console.log(appearanceTitleData);
   };
 
+  /* 
+  1 - get cast for correct answer (get when the correct answer has been found can be done before)
+  2 - check cast list function - does input name match any of the cast list
+  3 - 
+  
+  
+  
+  */
+
   const handleAnswerSubmit = (e) => {
     e.preventDefault();
     if (inputAnswer.length === 0) {
-      // set validation method later
+      // set velidation method
     } else {
       setIsChecking(true);
       if (isAppearanceRound) {
