@@ -5,12 +5,13 @@ import { useState } from "react";
 import { ActorContext } from "../context";
 import { getActorFilmography, getBio } from "../utils/api";
 import { Actor } from "./Actor";
+import { Appearance } from "./Appearance";
 import { InputArea } from "./InputArea";
 import { Loading } from "./Loading";
 
 export const Game = () => {
-  const { startActor, setStartActor } = useContext(ActorContext);
-  const { endActor, setEndActor } = useContext(ActorContext);
+  const { startActor, setStartActor, endActor, setEndActor, setFilmography } =
+    useContext(ActorContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export const Game = () => {
   return (
     <section className="game-area">
       <h2>game page</h2>
-      <Actor startActor={startActor} />
+      <Actor startActor={startActor} setFilmography={setFilmography} />
       <InputArea />
       <Actor endActor={endActor} />
     </section>

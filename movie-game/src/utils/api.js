@@ -59,9 +59,13 @@ export const getCastList = (title_id) => {
   return movieAPI
     .get("/title/get-full-credits", { params })
     .then(({ data }) => {
-      console.log(data.base);
-      const titleData = { titleType: data.base.titleType, cast: data.cast };
-      return titleData;
+      const appearanceData = {
+        title_id,
+        title: data.base.title,
+        titleType: data.base.titleType,
+        cast: data.cast,
+      };
+      return appearanceData;
     });
 };
 
