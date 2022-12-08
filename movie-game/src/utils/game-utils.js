@@ -19,6 +19,8 @@ export const checkAppearance = (title, actorApps) => {
   return result;
 };
 
+export const checkCast = () => {};
+
 // export const checkAppearance = (title, actorApps) => {
 //   const validCategory = ["actor", "actress", "self"];
 

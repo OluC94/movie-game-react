@@ -3,9 +3,10 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { ActorContext, GameContext } from "../context";
 import { getActorFilmography, getCastList } from "../utils/api";
-import { checkAppearance } from "../utils/game-utils";
+import { checkAppearance, checkCast } from "../utils/game-utils";
 import { matchCheck } from "../utils/inputProcessor";
 import { Appearance } from "./Appearance";
+import { Incorrect } from "./Incorrect";
 
 export const Input = ({ answerData }) => {
   // state
@@ -25,14 +26,8 @@ export const Input = ({ answerData }) => {
   // props
   const { answerList, setAnswerList, setIsValidAnswer } = answerData;
 
-  // everything else
   const handleAnswerInput = (e) => {
     setInputAnswer(e.target.value);
-  };
-
-  const checkActorApp = () => {
-    return checkAppearance(inputAnswer, filmography);
-    // get filmog from state
   };
 
   // check to see if input movie is correct
@@ -41,14 +36,20 @@ export const Input = ({ answerData }) => {
     if (getResult.isValid) {
       getCastList(getResult.title_id).then((result) => {
         setAppearanceData(result);
-        // this is where the new answers array will be changed
-        // push an Appearance component with appearanceData as the prop
+        setAnswerList([...answerList, <Appearance props={result} />]);
         setIsAppearanceRound(false);
+        setInputAnswer("");
       });
+    } else {
+      setAnswerList([...answerList, <Incorrect inputAnswer={inputAnswer} />]);
     }
   };
 
-  const handleActorInput = () => {};
+  const handleActorInput = () => {
+    const getResult = checkCast(inputAnswer, "where is the cast list data?");
+    // create check Cast function
+    // bring the cast list from Little Women into state
+  };
 
   const handleAnswerSubmit = (e) => {
     e.preventDefault();

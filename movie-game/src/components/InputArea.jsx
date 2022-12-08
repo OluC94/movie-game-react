@@ -9,34 +9,13 @@ export const InputArea = () => {
   const [isValidAnswer, setIsValidAnswer] = useState(null);
   const { startActor } = useContext(ActorContext);
 
-  // write the logic for the game prompts
-  // Can't is % 2 because wrong answers need to be pushed into the array
-  // can either brute force ()
-  // use a counter the keeps track of total correct answers and therefore the correct next input
-
   return (
     <section>
-      <DisplayInputs />
+      <DisplayInputs answerList={answerList} />
       <section className="answers">
-        {answerList.length === 0 ? (
-          `Name one of ${startActor.name}'s appearances`
-        ) : (
-          <ul className="answer-list">
-            {answerList.map((answer) => {
-              return (
-                <li
-                  key={Date.now()}
-                  // className={
-                  //   answer.isValid ? "correct-answer" : "incorrect-answer"
-                  // }
-                >
-                  {answer}
-                  List element within map
-                </li>
-              );
-            })}
-          </ul>
-        )}
+        {answerList.length === 0
+          ? `Name one of ${startActor.name}'s appearances`
+          : null}
       </section>
       <Input answerData={{ answerList, setAnswerList, setIsValidAnswer }} />
     </section>
