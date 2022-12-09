@@ -19,7 +19,24 @@ export const checkAppearance = (title, actorApps) => {
   return result;
 };
 
-export const checkCast = () => {};
+export const checkCast = (name, appearanceData) => {
+  const { cast } = appearanceData;
+  const validCategory = ["actor", "actress", "self"];
+  const result = { actor_name: null, actor_id: null, isValid: false };
+
+  for (let i = 0; i < cast.length; i++) {
+    if (
+      name.toLowerCase() === cast[i].name.toLowerCase() &&
+      validCategory.includes(cast[i].category)
+    ) {
+      result.actor_name = cast[i].name;
+      result.actor_id = cast[i].id.substring(6, cast[i].id.length - 1);
+      result.isValid = true;
+      return result;
+    }
+  }
+  return result;
+};
 
 // export const checkAppearance = (title, actorApps) => {
 //   const validCategory = ["actor", "actress", "self"];

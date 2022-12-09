@@ -22,6 +22,7 @@ export const Input = ({ answerData }) => {
     score,
     setScore,
     setAppearanceData,
+    appearanceData,
   } = useContext(GameContext);
   // props
   const { answerList, setAnswerList, setIsValidAnswer } = answerData;
@@ -46,9 +47,8 @@ export const Input = ({ answerData }) => {
   };
 
   const handleActorInput = () => {
-    const getResult = checkCast(inputAnswer, "where is the cast list data?");
-    // create check Cast function
-    // bring the cast list from Little Women into state
+    const getResult = checkCast(inputAnswer, appearanceData);
+    console.log(getResult);
   };
 
   const handleAnswerSubmit = (e) => {
