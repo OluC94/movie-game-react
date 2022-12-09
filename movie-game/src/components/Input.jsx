@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { useContext } from "react";
 import { ActorContext, GameContext } from "../context";
-import { getActorFilmography, getCastList } from "../utils/api";
+import { getCastList } from "../utils/api";
 import { checkAppearance, checkCast } from "../utils/game-utils";
-import { matchCheck } from "../utils/inputProcessor";
+import { Actor } from "./Actor";
 import { Appearance } from "./Appearance";
 import { Incorrect } from "./Incorrect";
 
@@ -46,9 +45,17 @@ export const Input = ({ answerData }) => {
     }
   };
 
+  // check to see if input actor is correct
   const handleActorInput = () => {
     const getResult = checkCast(inputAnswer, appearanceData);
-    console.log(getResult);
+    if (getResult.isValid) {
+      // figure out state that needs to be set here
+      setAnswerList([...answerList, <Actor fetchedActorData={getResult} />]);
+      // setIsAppearanceRound(true);  // flip back to app round
+      setInputAnswer("");
+    } else {
+      setAnswerList([...answerList, <Incorrect inputAnswer={inputAnswer} />]);
+    }
   };
 
   const handleAnswerSubmit = (e) => {

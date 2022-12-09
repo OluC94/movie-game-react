@@ -43,9 +43,9 @@ export const getActorFilmography = (actorID) => {
   return movieAPI
     .get("/actors/get-all-filmography", { params })
     .then(({ data }) => {
-      const filmographyData = {
-        // title, id, cast[{name, realName, img, actor_id}, ...]
-      };
+      // const filmographyData = {
+      //   // title, id, cast[{name, realName, img, actor_id}, ...]
+      // };
 
       return data.filmography;
     })
@@ -63,8 +63,10 @@ export const getCastList = (title_id) => {
         title_id,
         title: data.base.title,
         titleType: data.base.titleType,
+        img: data.base.image.url,
         cast: data.cast,
       };
+
       return appearanceData;
     });
 };

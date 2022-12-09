@@ -6,8 +6,14 @@ import { Loading } from "./Loading";
 
 export const Actor = (props) => {
   const [isLoading, setIsLoading] = useState(true);
-  const actorInfo = props.startActor || props.endActor;
-  const { setFilmography } = props;
+  const { setFilmography, fetchedActorData } = props;
+
+  let actorInfo;
+  if (props.fetchedActorData) {
+    actorInfo = fetchedActorData;
+  } else {
+    actorInfo = props.startActor || props.endActor;
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,7 +25,7 @@ export const Actor = (props) => {
         setIsLoading(false);
       }
     );
-  }, []);
+  }, [actorInfo]);
 
   if (isLoading) return <Loading />;
   return (
