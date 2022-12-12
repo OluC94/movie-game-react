@@ -2,7 +2,7 @@ import React from "react";
 
 export const Appearance = ({ props }) => {
   const { title_id, title, titleType, img, cast } = props;
-  console.log(props);
+  // console.log(props);
   return (
     <section className="appearance">
       <h3>{title}</h3>

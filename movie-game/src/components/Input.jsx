@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { ActorContext, GameContext } from "../context";
 import { getCastList } from "../utils/api";
-import { checkAppearance, checkCast } from "../utils/game-utils";
+import {
+  checkAppearance,
+  checkCast,
+  updateFilmography,
+} from "../utils/game-utils";
 import { Actor } from "./Actor";
 import { Appearance } from "./Appearance";
 import { Incorrect } from "./Incorrect";
@@ -14,7 +18,8 @@ export const Input = ({ answerData }) => {
   const [actorQueryID, setActorQueryID] = useState("");
 
   // context
-  const { startActor, endActor, filmography } = useContext(ActorContext);
+  const { startActor, endActor, filmography, setFilmography } =
+    useContext(ActorContext);
   const {
     isAppearanceRound,
     setIsAppearanceRound,
@@ -43,6 +48,7 @@ export const Input = ({ answerData }) => {
     } else {
       setAnswerList([...answerList, <Incorrect inputAnswer={inputAnswer} />]);
     }
+    console.log(filmography);
   };
 
   // check to see if input actor is correct
@@ -50,8 +56,14 @@ export const Input = ({ answerData }) => {
     const getResult = checkCast(inputAnswer, appearanceData);
     if (getResult.isValid) {
       // figure out state that needs to be set here
-      setAnswerList([...answerList, <Actor fetchedActorData={getResult} />]);
-      // setIsAppearanceRound(true);  // flip back to app round
+      setAnswerList([
+        ...answerList,
+        <Actor fetchedActorData={getResult} setFilmography={setFilmography} />,
+      ]);
+      // the actor component sets the new filmography
+      console.log(getResult);
+
+      setIsAppearanceRound(true); // flip back to app round
       setInputAnswer("");
     } else {
       setAnswerList([...answerList, <Incorrect inputAnswer={inputAnswer} />]);

@@ -7,25 +7,28 @@ import { Loading } from "./Loading";
 export const Actor = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const { setFilmography, fetchedActorData } = props;
-
+  // const [actorInfo, setActorInfo] = useState({});
   let actorInfo;
+
   if (props.fetchedActorData) {
+    // setActorInfo(fetchedActorData);
     actorInfo = fetchedActorData;
   } else {
+    // setActorInfo(props.startActor || props.endActor);
     actorInfo = props.startActor || props.endActor;
   }
 
   useEffect(() => {
+    console.log(props);
     setIsLoading(true);
-    Promise.all([getActorFilmography(actorInfo.actor_id)]).then(
-      (filmographyData) => {
-        if (props.startActor) {
-          setFilmography(filmographyData[0]);
-        }
-        setIsLoading(false);
+    getActorFilmography(actorInfo.actor_id).then((filmographyData) => {
+      if (props.startActor || props.fetchedActorData) {
+        setFilmography(filmographyData);
+        // THIS SHOULD WORK NOW, ADDED THE PROPS TO THE NEW ACTOR COMPONENT
       }
-    );
-  }, [actorInfo]);
+      setIsLoading(false);
+    });
+  }, []);
 
   if (isLoading) return <Loading />;
   return (
