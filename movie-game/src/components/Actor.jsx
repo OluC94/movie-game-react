@@ -1,12 +1,15 @@
 import React from "react";
 import { useState } from "react";
+import { useContext } from "react";
 import { useEffect } from "react";
+import { ActorContext } from "../context";
 import { getActorFilmography } from "../utils/api";
 import { Loading } from "./Loading";
 
 export const Actor = (props) => {
   const [isLoading, setIsLoading] = useState(true);
-  const { setFilmography, fetchedActorData } = props;
+  const { fetchedActorData } = props;
+  const { setFilmography, setTargetFilmography } = useContext(ActorContext);
   // const [actorInfo, setActorInfo] = useState({});
   let actorInfo;
 
@@ -19,14 +22,16 @@ export const Actor = (props) => {
   }
 
   useEffect(() => {
-    console.log(props);
     setIsLoading(true);
     getActorFilmography(actorInfo.actor_id).then((filmographyData) => {
       if (props.startActor || props.fetchedActorData) {
         setFilmography(filmographyData);
-        // THIS SHOULD WORK NOW, ADDED THE PROPS TO THE NEW ACTOR COMPONENT
       }
       setIsLoading(false);
+
+      if (props.endActor) {
+        setTargetFilmography(filmographyData);
+      }
     });
   }, []);
 

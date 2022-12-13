@@ -48,6 +48,11 @@ export const checkCast = (name, appearanceData) => {
   return result;
 };
 
+export const checkWinner = (actor_id, targetFilmog) => {
+  const formatted_id = `/title/${actor_id}/`;
+  return targetFilmog.some((appearance) => appearance.id === formatted_id);
+};
+
 // export const checkAppearance = (title, actorApps) => {
 //   const validCategory = ["actor", "actress", "self"];
 

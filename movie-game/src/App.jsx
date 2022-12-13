@@ -10,9 +10,11 @@ function App() {
   const [startActor, setStartActor] = useState({});
   const [filmography, setFilmography] = useState([]);
   const [endActor, setEndActor] = useState({});
+  const [targetFilmography, setTargetFilmography] = useState([]);
 
   //game context
   const [gameOver, setGameOver] = useState(null); // implement start button, init this as true until start is pressed
+  const [gameWon, setGameWon] = useState(false);
   const [isAppearanceRound, setIsAppearanceRound] = useState(true); // true/false for check filmog/cast
   const [score, setScore] = useState(0);
   const [appearanceData, setAppearanceData] = useState({});
@@ -26,6 +28,8 @@ function App() {
         setEndActor,
         filmography,
         setFilmography,
+        targetFilmography,
+        setTargetFilmography,
       }}
     >
       <GameContext.Provider
@@ -38,6 +42,8 @@ function App() {
           setScore,
           appearanceData,
           setAppearanceData,
+          gameWon,
+          setGameWon,
         }}
       >
         <section className="App">
