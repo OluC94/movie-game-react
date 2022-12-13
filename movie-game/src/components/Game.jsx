@@ -8,6 +8,7 @@ import { Actor } from "./Actor";
 import { Appearance } from "./Appearance";
 import { InputArea } from "./InputArea";
 import { Loading } from "./Loading";
+import { Winner } from "./Winner";
 
 export const Game = () => {
   const { startActor, setStartActor, endActor, setEndActor, setFilmography } =
@@ -29,7 +30,7 @@ export const Game = () => {
   return (
     <section className="game-area">
       <h2>game page</h2>
-      <Actor startActor={startActor} setFilmography={setFilmography} />
+      <Actor startActor={startActor} />
       <InputArea />
       <Actor endActor={endActor} />
     </section>

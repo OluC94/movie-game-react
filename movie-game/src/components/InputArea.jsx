@@ -1,13 +1,15 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { Input } from "./Input";
-import { ActorContext } from "../context";
+import { ActorContext, GameContext } from "../context";
 import { DisplayInputs } from "./DisplayInputs";
+import { Winner } from "./Winner";
 
 export const InputArea = () => {
   const [answerList, setAnswerList] = useState([]);
   const [isValidAnswer, setIsValidAnswer] = useState(null);
   const { startActor } = useContext(ActorContext);
+  const { gameWon } = useContext(GameContext);
 
   return (
     <section>
@@ -17,7 +19,11 @@ export const InputArea = () => {
           ? `Name one of ${startActor.name}'s appearances`
           : null}
       </section>
-      <Input answerData={{ answerList, setAnswerList, setIsValidAnswer }} />
+      {gameWon ? (
+        <Winner />
+      ) : (
+        <Input answerData={{ answerList, setAnswerList, setIsValidAnswer }} />
+      )}
     </section>
   );
 };

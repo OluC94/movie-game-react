@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { useContext } from "react";
 import { ActorContext, GameContext } from "../context";
-import { getActorFilmography, getCastList } from "../utils/api";
-import { checkAppearance, checkCast } from "../utils/game-utils";
-import { matchCheck } from "../utils/inputProcessor";
+import { getCastList } from "../utils/api";
+import {
+  checkAppearance,
+  checkCast,
+  checkWinner,
+  updateFilmography,
+} from "../utils/game-utils";
+import { Actor } from "./Actor";
 import { Appearance } from "./Appearance";
 import { Incorrect } from "./Incorrect";
 
@@ -15,13 +19,21 @@ export const Input = ({ answerData }) => {
   const [actorQueryID, setActorQueryID] = useState("");
 
   // context
-  const { startActor, endActor, filmography } = useContext(ActorContext);
+  const {
+    startActor,
+    endActor,
+    filmography,
+    setFilmography,
+    targetFilmography,
+  } = useContext(ActorContext);
   const {
     isAppearanceRound,
     setIsAppearanceRound,
     score,
     setScore,
     setAppearanceData,
+    appearanceData,
+    setGameWon,
   } = useContext(GameContext);
   // props
   const { answerList, setAnswerList, setIsValidAnswer } = answerData;
@@ -40,15 +52,25 @@ export const Input = ({ answerData }) => {
         setIsAppearanceRound(false);
         setInputAnswer("");
       });
+
+      if (checkWinner(getResult.title_id, targetFilmography)) {
+        setGameWon(true);
+      }
     } else {
       setAnswerList([...answerList, <Incorrect inputAnswer={inputAnswer} />]);
     }
   };
 
+  // check to see if input actor is correct
   const handleActorInput = () => {
-    const getResult = checkCast(inputAnswer, "where is the cast list data?");
-    // create check Cast function
-    // bring the cast list from Little Women into state
+    const getResult = checkCast(inputAnswer, appearanceData);
+    if (getResult.isValid) {
+      setAnswerList([...answerList, <Actor fetchedActorData={getResult} />]);
+      setIsAppearanceRound(true); // flip back to app round
+      setInputAnswer("");
+    } else {
+      setAnswerList([...answerList, <Incorrect inputAnswer={inputAnswer} />]);
+    }
   };
 
   const handleAnswerSubmit = (e) => {

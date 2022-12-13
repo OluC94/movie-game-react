@@ -54,9 +54,22 @@
   max-width: 50vw;
 }
 
+.appearance-img {
+  display: block;
+  margin: 0 auto;
+  max-width: 50vw;
+}
+
 .actor {
   border: 3px;
   border-style: dotted;
+  padding: 1px;
+  margin: 5px;
+}
+
+.appearance {
+  border: 3px;
+  border-style: dashed;
   padding: 1px;
   margin: 5px;
 }
