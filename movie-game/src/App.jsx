@@ -14,6 +14,7 @@ function App() {
 
   //game context
   const [gameOver, setGameOver] = useState(null); // implement start button, init this as true until start is pressed
+  const [initGame, setInitGame] = useState(false);
   const [gameWon, setGameWon] = useState(false);
   const [isAppearanceRound, setIsAppearanceRound] = useState(true); // true/false for check filmog/cast
   const [score, setScore] = useState(0);
@@ -44,6 +45,8 @@ function App() {
           setAppearanceData,
           gameWon,
           setGameWon,
+          initGame,
+          setInitGame,
         }}
       >
         <section className="App">
