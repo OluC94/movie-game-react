@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import { ActorContext, GameContext } from "../context";
 import { getActorFilmography, getBio } from "../utils/api";
+import { gameInit } from "../utils/game-utils";
 import { Actor } from "./Actor";
 import { Appearance } from "./Appearance";
 import { InputArea } from "./InputArea";
@@ -18,14 +19,21 @@ export const Game = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const start = getBio("nm6073955"); // nm5939164
-    const target = getBio("nm5939164"); //nm6073955
 
-    Promise.all([start, target]).then((actors) => {
-      setStartActor(actors[0]);
-      setEndActor(actors[1]);
-      setIsLoading(false);
-    });
+    Promise.all([gameInit()])
+      .then(([{ start_id, end_id }]) => {
+        const start = getBio(start_id);
+        const target = getBio(end_id);
+
+        return Promise.all([start, target]);
+      })
+      .then(([start, target]) => {
+        setStartActor(start);
+        setEndActor(target);
+        setIsLoading(false);
+      });
+    // const start = getBio("nm6073955");
+    // const target = getBio("nm5939164");
   }, [initGame]);
   if (isLoading) return <Loading />;
   return (
