@@ -13,7 +13,7 @@ export const getMostPopular = () => {
   return movieAPI
     .get(`/actors/list-most-popular-celebs`)
     .then(({ data }) => {
-      console.log(data);
+      return data;
     })
     .catch((err) => {
       console.log(err);
@@ -68,6 +68,9 @@ export const getCastList = (title_id) => {
       };
 
       return appearanceData;
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 

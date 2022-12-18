@@ -7,7 +7,6 @@ import { Winner } from "./Winner";
 
 export const InputArea = () => {
   const [answerList, setAnswerList] = useState([]);
-  const [isValidAnswer, setIsValidAnswer] = useState(null);
   const { startActor } = useContext(ActorContext);
   const { gameWon } = useContext(GameContext);
 
@@ -22,7 +21,7 @@ export const InputArea = () => {
       {gameWon ? (
         <Winner />
       ) : (
-        <Input answerData={{ answerList, setAnswerList, setIsValidAnswer }} />
+        <Input answerData={{ answerList, setAnswerList }} />
       )}
     </section>
   );

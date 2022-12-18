@@ -1,4 +1,21 @@
-import { getActorFilmography } from "./api";
+import { getActorFilmography, getBio, getMostPopular } from "./api";
+
+const parseID = (str) => {
+  return str[1] === "n"
+    ? str.substring(6, str.length - 1)
+    : str.substring(7, str.length - 1);
+};
+
+const getRandNum = (range) => {
+  const num1 = Math.floor(Math.random() * range);
+  const num2 = Math.floor(Math.random() * range);
+
+  if (num1 === num2) {
+    getRandNum(range);
+  } else {
+    return { num1, num2 };
+  }
+};
 
 // title = name of movie or show
 export const checkAppearance = (title, actorApps) => {
@@ -53,16 +70,18 @@ export const checkWinner = (actor_id, targetFilmog) => {
   return targetFilmog.some((appearance) => appearance.id === formatted_id);
 };
 
-// export const checkAppearance = (title, actorApps) => {
-//   const validCategory = ["actor", "actress", "self"];
+export const gameInit = () => {
+  return Promise.all([getMostPopular()]).then(([actors]) => {
+    const init_ids = getRandNum(actors.length);
 
-//   for (let i = 0; i < actorApps.length; i++) {
-//     if (
-//       actorApps[i].title.toLowerCase() === title.toLowerCase() &&
-//       validCategory.includes(actorApps[i].category)
-//     ) {
-//       return true;
-//     }
-//   }
-//   return false;
-// };
+    return {
+      start_id: parseID(actors[init_ids.num1]),
+      end_id: parseID(actors[init_ids.num2]),
+    };
+  });
+};
+
+/* 
+
+
+*/

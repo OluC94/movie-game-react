@@ -1,4 +1,4 @@
-const mostPop100 = [
+export const mostPop100 = [
   "/name/nm5611121/",
   "/name/nm4456120/",
   "/name/nm0147147/",
