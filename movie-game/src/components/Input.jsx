@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { ActorContext, GameContext } from "../context";
 import { getCastList } from "../utils/api";
-import {
-  checkAppearance,
-  checkCast,
-  checkWinner,
-  updateFilmography,
-} from "../utils/game-utils";
+import { checkAppearance, checkCast, checkWinner } from "../utils/game-utils";
 import { Actor } from "./Actor";
 import { Appearance } from "./Appearance";
 import { Incorrect } from "./Incorrect";
@@ -16,16 +11,9 @@ export const Input = ({ answerData }) => {
   // state
   const [inputAnswer, setInputAnswer] = useState("");
   const [isChecking, setIsChecking] = useState(false);
-  const [actorQueryID, setActorQueryID] = useState("");
 
   // context
-  const {
-    startActor,
-    endActor,
-    filmography,
-    setFilmography,
-    targetFilmography,
-  } = useContext(ActorContext);
+  const { filmography, targetFilmography } = useContext(ActorContext);
   const {
     isAppearanceRound,
     setIsAppearanceRound,
@@ -36,7 +24,7 @@ export const Input = ({ answerData }) => {
     setGameWon,
   } = useContext(GameContext);
   // props
-  const { answerList, setAnswerList, setIsValidAnswer } = answerData;
+  const { answerList, setAnswerList } = answerData;
 
   const handleAnswerInput = (e) => {
     setInputAnswer(e.target.value);
@@ -76,7 +64,7 @@ export const Input = ({ answerData }) => {
   const handleAnswerSubmit = (e) => {
     e.preventDefault();
     if (inputAnswer.length === 0) {
-      // set validation method later
+      // add state that displays message
     } else {
       setIsChecking(true);
       if (isAppearanceRound) {
