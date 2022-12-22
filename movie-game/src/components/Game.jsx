@@ -36,7 +36,6 @@ export const Game = () => {
   if (isLoading) return <Loading />;
   return (
     <section className="game-area">
-      <h2>game page</h2>
       <Actor startActor={startActor} />
       <InputArea />
       <Actor endActor={endActor} />

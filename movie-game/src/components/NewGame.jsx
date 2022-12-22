@@ -10,5 +10,9 @@ export const NewGame = () => {
     }
   };
 
-  return <button onClick={handleNewGame}>New Game</button>;
+  return (
+    <button className="custom-button" onClick={handleNewGame}>
+      New Game
+    </button>
+  );
 };
