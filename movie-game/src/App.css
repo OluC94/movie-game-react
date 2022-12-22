@@ -29,7 +29,7 @@
 }
 
 .header {
-  background-color: lightslategray;
+  background-color: rgb(234, 140, 111);
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@
 }
 
 .game-area {
-  background-color: lightgray;
+  background-color: rgb(255, 193, 168);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -49,28 +49,38 @@
 }
 
 .actor-img {
+  border-radius: 25px;
   display: block;
   margin: 0 auto;
   max-width: 50vw;
 }
 
 .appearance-img {
+  border-radius: 25px;
   display: block;
   margin: 0 auto;
   max-width: 50vw;
 }
 
 .actor {
+  border-radius: 25px;
   border: 3px;
   border-style: dotted;
-  padding: 1px;
-  margin: 5px;
+  border-color: green;
+  /* outline: auto; */
+  /* background-color: green; */
+  margin: 0 auto;
+  padding: 10px;
+  padding-inline-start: 0px;
+  width: calc(75%);
 }
 
 .appearance {
+  border-radius: 25px;
   border: 3px;
   border-style: dashed;
-  padding: 1px;
+  border-color: green;
+  padding: 10px;
   margin: 5px;
 }
 
@@ -83,7 +93,7 @@
   gap: 12px;
   margin: 0 auto;
   padding-inline-start: 0px;
-  width: calc(95% + 12px);
+  width: calc(75%);
 }
 
 .correct-answer {
@@ -91,6 +101,21 @@
 }
 .incorrect-answer {
   color: red;
+}
+
+.custom-button {
+  background-color: navajowhite;
+  border-radius: 25px;
+}
+
+.score {
+  padding: 5px;
+}
+
+.game-won {
+  color: green;
+  border: 1px;
+  margin: 5px;
 }
 
 @keyframes App-logo-spin {

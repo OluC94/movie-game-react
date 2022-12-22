@@ -9,6 +9,7 @@ import { useState } from "react";
 function App() {
   const [startActor, setStartActor] = useState({});
   const [filmography, setFilmography] = useState([]);
+  const [startActorFilmography, setStartActorFilmography] = useState([]);
   const [endActor, setEndActor] = useState({});
   const [targetFilmography, setTargetFilmography] = useState([]);
 
@@ -31,6 +32,8 @@ function App() {
         setFilmography,
         targetFilmography,
         setTargetFilmography,
+        startActorFilmography,
+        setStartActorFilmography,
       }}
     >
       <GameContext.Provider

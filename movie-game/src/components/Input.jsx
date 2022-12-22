@@ -72,6 +72,9 @@ export const Input = ({ answerData }) => {
       } else {
         handleActorInput();
       }
+      setScore((currScore) => {
+        return currScore + 10;
+      });
     }
   };
 
@@ -88,9 +91,11 @@ export const Input = ({ answerData }) => {
           onChange={handleAnswerInput}
         ></textarea>
         <br />
-        <button onClick={handleAnswerSubmit}>Submit</button>
+        <button className="custom-button" onClick={handleAnswerSubmit}>
+          Submit
+        </button>
         <br />
-        <section>Score: {score}</section>
+        <section className="score">Score: {score}</section>
       </form>
     </section>
   );

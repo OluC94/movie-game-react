@@ -4,10 +4,11 @@ import { Input } from "./Input";
 import { ActorContext, GameContext } from "../context";
 import { DisplayInputs } from "./DisplayInputs";
 import { Winner } from "./Winner";
+import { Retry } from "./Retry";
 
 export const InputArea = () => {
   const [answerList, setAnswerList] = useState([]);
-  const { startActor } = useContext(ActorContext);
+  const { startActor, endActor } = useContext(ActorContext);
   const { gameWon } = useContext(GameContext);
 
   return (
@@ -15,7 +16,7 @@ export const InputArea = () => {
       <DisplayInputs answerList={answerList} />
       <section className="answers">
         {answerList.length === 0
-          ? `Name one of ${startActor.name}'s appearances`
+          ? `${startActor.name} to ${endActor.name}`
           : null}
       </section>
       {gameWon ? (
@@ -23,6 +24,7 @@ export const InputArea = () => {
       ) : (
         <Input answerData={{ answerList, setAnswerList }} />
       )}
+      <Retry setAnswerList={setAnswerList} />
     </section>
   );
 };
