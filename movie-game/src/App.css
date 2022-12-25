@@ -29,19 +29,19 @@
 }
 
 .header {
-  background-color: rgb(234, 140, 111);
+  background-color: rgb(123, 111, 234);
   min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  padding: 5px;
+  padding: 2px;
   color: black;
 }
 
 .game-area {
-  background-color: rgb(255, 193, 168);
+  background-color: rgb(175, 168, 255);
   display: flex;
   flex-direction: column;
   position: relative;
