@@ -13,7 +13,7 @@ export const InputArea = () => {
 
   return (
     <section>
-      <DisplayInputs answerList={answerList} />
+      <DisplayInputs answerList={answerList} setAnswerList={setAnswerList} />
       <section className="answers">
         {answerList.length === 0
           ? `${startActor.name} to ${endActor.name}`

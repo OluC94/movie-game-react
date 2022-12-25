@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { ActorContext, GameContext } from "../context";
+import { ActorContext } from "../context";
 import { getActorFilmography } from "../utils/api";
 import { Loading } from "./Loading";
 
