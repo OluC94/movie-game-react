@@ -29,6 +29,9 @@ export const Game = () => {
         setStartActor(start);
         setEndActor(target);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
       });
     // const start = getBio("nm6073955");
     // const target = getBio("nm5939164");
