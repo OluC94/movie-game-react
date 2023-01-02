@@ -20,6 +20,8 @@ function App() {
   const [isAppearanceRound, setIsAppearanceRound] = useState(true); // true/false for check filmog/cast
   const [score, setScore] = useState(0);
   const [appearanceData, setAppearanceData] = useState({});
+  const [isChecking, setIsChecking] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
   return (
     <ActorContext.Provider
@@ -50,6 +52,10 @@ function App() {
           setGameWon,
           initGame,
           setInitGame,
+          isChecking,
+          setIsChecking,
+          isCorrect,
+          setIsCorrect,
         }}
       >
         <section className="App">

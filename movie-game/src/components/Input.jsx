@@ -10,7 +10,6 @@ import { Incorrect } from "./Incorrect";
 export const Input = ({ answerData }) => {
   // state
   const [inputAnswer, setInputAnswer] = useState("");
-  const [isChecking, setIsChecking] = useState(false);
 
   // context
   const { filmography, targetFilmography } = useContext(ActorContext);
@@ -22,6 +21,8 @@ export const Input = ({ answerData }) => {
     setAppearanceData,
     appearanceData,
     setGameWon,
+    isChecking,
+    setIsChecking,
   } = useContext(GameContext);
   // props
   const { answerList, setAnswerList } = answerData;
@@ -45,6 +46,7 @@ export const Input = ({ answerData }) => {
         setGameWon(true);
       }
     } else {
+      console.log(filmography);
       setAnswerList([...answerList, <Incorrect inputAnswer={inputAnswer} />]);
     }
   };

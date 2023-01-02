@@ -71,14 +71,24 @@ export const checkWinner = (actor_id, targetFilmog) => {
 };
 
 export const gameInit = () => {
-  return Promise.all([getMostPopular()]).then(([actors]) => {
-    const init_ids = getRandNum(actors.length);
+  return Promise.all([getMostPopular()])
+    .then(([actors]) => {
+      const init_ids = getRandNum(actors.length);
 
-    return {
-      start_id: parseID(actors[init_ids.num1]),
-      end_id: parseID(actors[init_ids.num2]),
-    };
-  });
+      if (actors.errorData) {
+        console.log("rejected");
+        return Promise.reject(actors.errorData);
+      }
+
+      return {
+        start_id: parseID(actors[init_ids.num1]),
+        end_id: parseID(actors[init_ids.num2]),
+      };
+    })
+    .catch((err) => {
+      console.log(err);
+      // return the error message here back to Game.jsx -> manip state/context so that err msg can be used
+    });
 };
 
 /* 
