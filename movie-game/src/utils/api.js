@@ -16,7 +16,7 @@ export const getMostPopular = () => {
       return data;
     })
     .catch((err) => {
-      console.log(err);
+      return { errorData: err.response };
     });
 };
 
