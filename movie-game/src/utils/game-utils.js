@@ -18,8 +18,9 @@ const getRandNum = (range) => {
 };
 
 // title = name of movie or show
-export const checkAppearance = (title, actorApps) => {
+export const checkAppearance = (title, actorApps, isAppearanceRound) => {
   const validCategory = ["actor", "actress", "self"];
+
   const result = { title: null, title_id: null, img: null, isValid: false };
 
   for (let i = 0; i < actorApps.length; i++) {

@@ -33,9 +33,14 @@ export const Input = ({ answerData }) => {
 
   // check to see if input movie is correct
   const handleAppearanceInput = () => {
-    const getResult = checkAppearance(inputAnswer, filmography);
+    const getResult = checkAppearance(
+      inputAnswer,
+      filmography,
+      isAppearanceRound
+    );
     if (getResult.isValid) {
       getCastList(getResult.title_id).then((result) => {
+        setIsChecking(false);
         setAppearanceData(result);
         setAnswerList([...answerList, <Appearance props={result} />]);
         setIsAppearanceRound(false);
@@ -46,7 +51,7 @@ export const Input = ({ answerData }) => {
         setGameWon(true);
       }
     } else {
-      console.log(filmography);
+      setIsChecking(false);
       setAnswerList([...answerList, <Incorrect inputAnswer={inputAnswer} />]);
     }
   };
@@ -55,10 +60,12 @@ export const Input = ({ answerData }) => {
   const handleActorInput = () => {
     const getResult = checkCast(inputAnswer, appearanceData);
     if (getResult.isValid) {
+      setIsChecking(false);
       setAnswerList([...answerList, <Actor fetchedActorData={getResult} />]);
       setIsAppearanceRound(true); // flip back to app round
       setInputAnswer("");
     } else {
+      setIsChecking(false);
       setAnswerList([...answerList, <Incorrect inputAnswer={inputAnswer} />]);
     }
   };
@@ -85,7 +92,7 @@ export const Input = ({ answerData }) => {
       <form>
         <label htmlFor="new-answer"></label>
         <br />
-        <section>{isChecking ? "..." : null}</section>
+        {/* <section>{isChecking ? "..." : null}</section> */}
         <textarea
           id="new-answer"
           placeholder="Enter your answer"
