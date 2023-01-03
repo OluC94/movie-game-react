@@ -38,8 +38,6 @@ export const Game = () => {
         setIsLoading(false);
         setIsError(true);
       });
-    // const start = getBio("nm6073955");
-    // const target = getBio("nm5939164");
   }, [initGame]);
   if (isLoading) return <Loading />;
   if (isError) return <ErrorComponent />;

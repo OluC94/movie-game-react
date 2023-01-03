@@ -86,8 +86,7 @@ export const gameInit = () => {
       };
     })
     .catch((err) => {
-      console.log(err);
-      // return the error message here back to Game.jsx -> manip state/context so that err msg can be used
+      console.log(err.status || err);
     });
 };
 
