@@ -40,6 +40,11 @@
   color: black;
 }
 
+.how-to-play {
+  background-color: rgba(123, 111, 234, 0.745);
+  padding: 5px;
+}
+
 .game-area {
   background-color: rgb(175, 168, 255);
   display: flex;

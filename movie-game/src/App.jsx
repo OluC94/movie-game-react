@@ -5,6 +5,7 @@ import { Header } from "./components/Header";
 import { GamePage } from "./pages/GamePage";
 import { ActorContext, GameContext } from "./context";
 import { useState } from "react";
+import { HowToPlay } from "./components/HowToPlay";
 
 function App() {
   const [startActor, setStartActor] = useState({});
@@ -63,6 +64,7 @@ function App() {
       >
         <section className="App">
           <Header />
+          <HowToPlay />
           <GamePage />
         </section>
       </GameContext.Provider>
