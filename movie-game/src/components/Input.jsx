@@ -23,6 +23,8 @@ export const Input = ({ answerData }) => {
     setGameWon,
     isChecking,
     setIsChecking,
+    isEmptyAnswer,
+    setIsEmptyAnswer,
   } = useContext(GameContext);
   // props
   const { answerList, setAnswerList } = answerData;
@@ -33,11 +35,7 @@ export const Input = ({ answerData }) => {
 
   // check to see if input movie is correct
   const handleAppearanceInput = () => {
-    const getResult = checkAppearance(
-      inputAnswer,
-      filmography,
-      isAppearanceRound
-    );
+    const getResult = checkAppearance(inputAnswer, filmography);
     if (getResult.isValid) {
       getCastList(getResult.title_id).then((result) => {
         setIsChecking(false);
@@ -73,8 +71,9 @@ export const Input = ({ answerData }) => {
   const handleAnswerSubmit = (e) => {
     e.preventDefault();
     if (inputAnswer.length === 0) {
-      // add state that displays message
+      setIsEmptyAnswer(true);
     } else {
+      setIsEmptyAnswer(false);
       setIsChecking(true);
       if (isAppearanceRound) {
         handleAppearanceInput();
@@ -99,6 +98,10 @@ export const Input = ({ answerData }) => {
           value={inputAnswer}
           onChange={handleAnswerInput}
         ></textarea>
+        <br />
+        {isEmptyAnswer ? (
+          <section>Your answer must be at least 1 character</section>
+        ) : null}
         <br />
         <button className="custom-button" onClick={handleAnswerSubmit}>
           Submit

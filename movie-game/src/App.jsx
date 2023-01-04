@@ -22,6 +22,7 @@ function App() {
   const [appearanceData, setAppearanceData] = useState({});
   const [isChecking, setIsChecking] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [isEmptyAnswer, setIsEmptyAnswer] = useState(false);
 
   return (
     <ActorContext.Provider
@@ -56,6 +57,8 @@ function App() {
           setIsChecking,
           isCorrect,
           setIsCorrect,
+          isEmptyAnswer,
+          setIsEmptyAnswer,
         }}
       >
         <section className="App">
