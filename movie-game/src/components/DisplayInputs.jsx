@@ -16,7 +16,7 @@ export const DisplayInputs = ({ answerList, setAnswerList }) => {
           );
         })}
       </ul>
-      <section>{isChecking ? "..." : null}</section>
+      {/* <section>{isChecking ? "..." : null}</section> */}
     </section>
   );
 };

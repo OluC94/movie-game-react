@@ -91,7 +91,7 @@ export const Input = ({ answerData }) => {
       <form>
         <label htmlFor="new-answer"></label>
         <br />
-        {/* <section>{isChecking ? "..." : null}</section> */}
+        <section>{isChecking ? "..." : null}</section>
         <textarea
           id="new-answer"
           placeholder="Enter your answer"

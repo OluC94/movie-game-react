@@ -6,7 +6,6 @@ export const HowToPlay = () => {
 
   const handleShowInstructions = () => {
     setShowInstructions((currValue) => !currValue);
-    console.log(showInstructions);
   };
 
   return (
