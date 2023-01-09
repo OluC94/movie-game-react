@@ -3,8 +3,13 @@ import { useContext } from "react";
 import { ActorContext, GameContext } from "../context";
 
 export const Retry = ({ setAnswerList }) => {
-  const { setScore, setIsAppearanceRound, setGameWon, setIsEmptyAnswer } =
-    useContext(GameContext);
+  const {
+    setScore,
+    setIsAppearanceRound,
+    setGameWon,
+    setIsEmptyAnswer,
+    setIsIncorrect,
+  } = useContext(GameContext);
   const { setFilmography, startActorFilmography } = useContext(ActorContext);
 
   const handleRetry = () => {
@@ -15,6 +20,7 @@ export const Retry = ({ setAnswerList }) => {
       setFilmography(startActorFilmography);
       setGameWon(false);
       setIsEmptyAnswer(false);
+      setIsIncorrect(false);
       window.scrollTo(0, 0);
     }
   };

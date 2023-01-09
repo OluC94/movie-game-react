@@ -45,6 +45,14 @@
   padding: 5px;
 }
 
+.instructions {
+  list-style: none;
+}
+
+li:not(:last-child) {
+  margin-bottom: 5px;
+}
+
 .game-area {
   background-color: rgb(175, 168, 255);
   display: flex;
@@ -111,6 +119,8 @@
 .custom-button {
   background-color: navajowhite;
   border-radius: 25px;
+  padding-bottom: 2px;
+  margin: 2px;
 }
 
 .score {

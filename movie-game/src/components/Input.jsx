@@ -25,6 +25,8 @@ export const Input = ({ answerData }) => {
     setIsChecking,
     isEmptyAnswer,
     setIsEmptyAnswer,
+    isIncorrect,
+    setIsIncorrect,
   } = useContext(GameContext);
   // props
   const { answerList, setAnswerList } = answerData;
@@ -37,19 +39,24 @@ export const Input = ({ answerData }) => {
   const handleAppearanceInput = () => {
     const getResult = checkAppearance(inputAnswer, filmography);
     if (getResult.isValid) {
-      getCastList(getResult.title_id).then((result) => {
-        setIsChecking(false);
-        setAppearanceData(result);
-        setAnswerList([...answerList, <Appearance props={result} />]);
-        setIsAppearanceRound(false);
-        setInputAnswer("");
-      });
-
-      if (checkWinner(getResult.title_id, targetFilmography)) {
-        setGameWon(true);
-      }
+      getCastList(getResult.title_id)
+        .then((result) => {
+          setIsChecking(false);
+          setIsIncorrect(false);
+          setAppearanceData(result);
+          setAnswerList([...answerList, <Appearance props={result} />]);
+          setIsAppearanceRound(false);
+          setInputAnswer("");
+        })
+        .then(() => {
+          if (checkWinner(getResult.title_id, targetFilmography)) {
+            setIsIncorrect(false);
+            setGameWon(true);
+          }
+        });
     } else {
       setIsChecking(false);
+      setIsIncorrect(true);
       setAnswerList([...answerList, <Incorrect inputAnswer={inputAnswer} />]);
     }
   };
@@ -59,17 +66,20 @@ export const Input = ({ answerData }) => {
     const getResult = checkCast(inputAnswer, appearanceData);
     if (getResult.isValid) {
       setIsChecking(false);
+      setIsIncorrect(false);
       setAnswerList([...answerList, <Actor fetchedActorData={getResult} />]);
       setIsAppearanceRound(true); // flip back to app round
       setInputAnswer("");
     } else {
       setIsChecking(false);
+      setIsIncorrect(true);
       setAnswerList([...answerList, <Incorrect inputAnswer={inputAnswer} />]);
     }
   };
 
   const handleAnswerSubmit = (e) => {
     e.preventDefault();
+    setIsIncorrect(false);
     if (inputAnswer.length === 0) {
       setIsEmptyAnswer(true);
     } else {
@@ -92,6 +102,8 @@ export const Input = ({ answerData }) => {
         <label htmlFor="new-answer"></label>
         <br />
         <section>{isChecking ? "..." : null}</section>
+        {isIncorrect ? <section>Incorrect, try again!</section> : null}
+        <br />
         <textarea
           id="new-answer"
           placeholder="Enter your answer"
