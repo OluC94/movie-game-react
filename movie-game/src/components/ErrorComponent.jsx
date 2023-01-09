@@ -1,5 +1,5 @@
 import React from "react";
 
 export const ErrorComponent = () => {
-  return <h3>Oof madone...Something went wrong</h3>;
+  return <h3>Oof...Something went wrong</h3>;
 };

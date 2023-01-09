@@ -43,10 +43,6 @@ export const getActorFilmography = (actorID) => {
   return movieAPI
     .get("/actors/get-all-filmography", { params })
     .then(({ data }) => {
-      // const filmographyData = {
-      //   // title, id, cast[{name, realName, img, actor_id}, ...]
-      // };
-
       return data.filmography;
     })
     .catch((err) => {
@@ -73,7 +69,3 @@ export const getCastList = (title_id) => {
       console.log(err);
     });
 };
-
-// getCastList("tt3281548");
-
-// https://rapidapi.com/apidojo/api/online-movie-database

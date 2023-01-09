@@ -13,7 +13,7 @@ import { ErrorComponent } from "./ErrorComponent";
 export const Game = () => {
   const { startActor, setStartActor, endActor, setEndActor } =
     useContext(ActorContext);
-  const { initGame } = useContext(GameContext);
+  const { initGame, setIsChecking } = useContext(GameContext);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -23,6 +23,7 @@ export const Game = () => {
 
     Promise.all([gameInit()])
       .then(([{ start_id, end_id }]) => {
+        setIsChecking(false);
         const start = getBio(start_id);
         const target = getBio(end_id);
 
